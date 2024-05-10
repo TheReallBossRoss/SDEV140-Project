@@ -15,7 +15,7 @@ class IceCreamOrderApp:
         """
         self.master = master  # Initialize the root window
         self.master.title("Kevin's Creamy Confections Order Application")  # Set the title of the window
-        self.master.geometry("800x900")  # Set the dimensions of the window
+        self.master.geometry("800x950")  # Set the dimensions of the window
 
         # Initialize variables to store user inputs
         self.order_type_var = tk.StringVar()
@@ -105,15 +105,19 @@ class IceCreamOrderApp:
         exit_button = tk.Button(self.master, text="Exit", command=self.exit_application)  # Create a button to exit application
         exit_button.pack(pady=10)  # Pack the exit button
 
+        # Button for creating a new order
+        new_order_button = tk.Button(self.master, text="New Order", command=self.new_order)
+        new_order_button.pack(pady=10)
+
         # Load and display images
         self.image1 = tk.PhotoImage(file="cone.png")  # Load an image for Cone
         self.image2 = tk.PhotoImage(file="ice.png")  # Load an image for Ice Cream
 
         # Display images
-        image_label1 = tk.Label(self.master, image=self.image1)  # Create a label to display image1
+        image_label1 = tk.Label(self.master, image=self.image1, text="Ice Cream")  # Create a label to display image1
         image_label1.pack(side="left")  # Pack the label to the left
 
-        image_label2 = tk.Label(self.master, image=self.image2)  # Create a label to display image2
+        image_label2 = tk.Label(self.master, image=self.image2, text="Ice Cream")  # Create a label to display image2
         image_label2.pack(side="right")  # Pack the label to the right
 
     def validate_name(self, char):
@@ -218,6 +222,15 @@ class IceCreamOrderApp:
 
         toppings_label = tk.Label(order_details_window, text="Toppings: " + toppings_text)  # Create a label for toppings
         toppings_label.pack(pady=5)  # Pack the toppings label
+
+    def new_order(self):
+         """
+         Close the current window and open a new one for a new order.
+         """
+         self.master.destroy()  # Close the current window
+         root = tk.Tk()  # Create a new root window
+         app = IceCreamOrderApp(root)  # Initialize the IceCreamOrderApp again
+         root.mainloop()  # Start the tkinter event loop for the new windo
 
     def exit_application(self):
         """
